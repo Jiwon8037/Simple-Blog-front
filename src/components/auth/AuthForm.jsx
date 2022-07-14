@@ -37,7 +37,7 @@ const StyledFooter=styled.div`
         }
     }
 `;
-const StyledButtonWithMaginTop=styled(Button)`
+const StyledButtonWithMarginTop=styled(Button)`
     margin-top: 1rem;
 `;
 
@@ -46,18 +46,19 @@ const textMap={
     register:'회원가입'
 };
 
-const AuthForm = ({type}) => {
+const AuthForm = ({type,form,onChange,onSubmit}) => {
     const text=textMap[type];
+
     return (
         <StyledAuthForm>
             <h3>{text}</h3>
-            <form>
-                <StyledInput autoComplete='username' name='username' placeholder='ID'/>
-                <StyledInput autoComplete='password' name='password' placeholder='PW' type='password'/>
+            <form onSubmit={onSubmit}>
+                <StyledInput autoComplete='username' name='username' placeholder='ID' onChange={onChange} value={form.username}/>
+                <StyledInput autoComplete='password' name='password' placeholder='PW' type='password' onChange={onChange} value={form.password}/>
                 {type==='register'&&(
-                    <StyledInput autoComplete='new-password' name='passwordConfirm' placeholder='PW Check' type='password'/>
+                    <StyledInput autoComplete='new-password' name='passwordConfirm' placeholder='PW Check' type='password' onChange={onChange} value={form.passwordConfirm}/>
                 )}
-                <StyledButtonWithMaginTop cyan fullWidth>{text}</StyledButtonWithMaginTop>
+                <StyledButtonWithMarginTop cyan fullWidth>{text}</StyledButtonWithMarginTop>
             </form>
             <StyledFooter>
                 {type==='login'?(
