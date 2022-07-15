@@ -1,6 +1,5 @@
 import produce from "immer";
 import { createAction, handleActions } from "redux-actions";
-import RegisterPage from "../pages/RegisterPage";
 
 const CHANGE_FIELD='auth/CHANGE_FIELD';
 const INITALIZE_FORM='auth/INITALIZE_FORM';
