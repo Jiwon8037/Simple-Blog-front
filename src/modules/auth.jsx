@@ -60,21 +60,21 @@ const auth=handleActions(
             ...state,
             [form]:initialState[form],
         }),
-        [REGISTER_SUCCESS]:(state,{payload:{auth}})=>({
+        [REGISTER_SUCCESS]:(state,{payload:auth})=>({
             ...state,
             authError:null,
             auth,
         }),
-        [REGISTER_FAILURE]:(state,{payload:{error}})=>({
+        [REGISTER_FAILURE]:(state,{payload:error})=>({
             ...state,
             authError:error,
         }),
-        [LOGIN_SUCCESS]:(state,{payload:{auth}})=>({
+        [LOGIN_SUCCESS]:(state,{payload:auth})=>({
             ...state,
             authError:null,
             auth,
         }),
-        [LOGIN_FAILURE]:(state,{payload:{error}})=>({
+        [LOGIN_FAILURE]:(state,{payload:error})=>({
             ...state,
             authError:error,
         }),
