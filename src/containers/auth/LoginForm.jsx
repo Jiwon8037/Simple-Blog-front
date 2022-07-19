@@ -53,8 +53,13 @@ const LoginForm = () => {
     useEffect(()=>{
         if(user){
             navigate('/');
+            try{
+                localStorage.setItem('user',JSON.stringify(user));
+            }catch(e){
+                console.log('localstorage error');
+            }
         }
-    });
+    },[navigate,user]);
 
     return (
         <AuthForm type='login' form={form} onChange={onChange} onSubmit={onSubmit} error={error}/>
