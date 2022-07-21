@@ -10,6 +10,7 @@ const TagBoxContainer = () => {
     const onChangeTags=nextTags=>{
         dispatch(
             changeField({
+                
                 key:'tags',
                 value:nextTags,
             }),

@@ -1,0 +1,3 @@
+const client=require('./client');
+
+export const writePost=({title,body,tags})=>client.post('/api/posts',{title,body,tags});
