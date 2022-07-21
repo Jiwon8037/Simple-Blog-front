@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/palette';
 
@@ -69,15 +69,17 @@ const TagList=React.memo(({tags,onRemove})=>(
     </StyledTagList>
 ));
 
-const TagBox = () => {
+const TagBox = ({tags,onChangeTags}) => {
     const [input,setInput]=useState('');
     const [localTags,setLocalTags]=useState([]);
 
     const insertTag=useCallback(tag=>{
         if(!tag)return;
         if(localTags.includes(tag))return;
-        setLocalTags([...localTags, tag]);
-    },[localTags]);
+        const nextTags=[...localTags,tag];
+        setLocalTags(nextTags);
+        onChangeTags(nextTags);
+    },[localTags,onChangeTags]);
 
     const onRemove=useCallback(tag=>{
         setLocalTags(localTags.filter(t=>t!==tag));
@@ -92,6 +94,10 @@ const TagBox = () => {
         insertTag(input.trim());
         setInput('');
     },[input,insertTag]);
+
+    useEffect(()=>{
+        setLocalTags(tags);
+    },[tags]);
 
     return (
         <StyledTagBox>
