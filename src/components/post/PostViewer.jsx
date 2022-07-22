@@ -23,7 +23,7 @@ const PostContent=styled.div`
     color:${palette.gray[8]};
 `;
 
-const PostViewer = ({post,error,loading}) => {
+const PostViewer = ({post,error,loading,actionButtons}) => {
     if(error){
         if(error.response&&error.response.status==404){
             return<StyledPostViewer>404 Not Found!</StyledPostViewer>
@@ -43,6 +43,7 @@ const PostViewer = ({post,error,loading}) => {
                 <SubInfo username={user.username} publishedDate={publishedDate} hasMarginTop/>
                 <Tags tags={tags}/>
             </PostHead>
+            {actionButtons}
             <PostContent dangerouslySetInnerHTML={{__html:body}}/>
         </StyledPostViewer>
     );
