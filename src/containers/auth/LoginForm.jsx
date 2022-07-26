@@ -44,9 +44,10 @@ const LoginForm = () => {
         }
         if(auth){
             console.log(auth);
+            console.log(user)
             dispatch(check());
         }
-    },[auth,authError,dispatch]);
+    },[auth,authError,dispatch,user]);
 
     const navigate=useNavigate();
 

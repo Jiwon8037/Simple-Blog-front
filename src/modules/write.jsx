@@ -1,7 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
-import createRequestSaga,{createRequestActionTypes} from "../lib/createRequestSaga";
+import createRequestThunk,{createRequestActionTypes} from "../lib/createRequestThunk";
 import * as postsAPI from '../lib/api/posts';
-import { takeLatest } from "@redux-saga/core/effects";
 
 const INITIALIZE='write/INITIALIZE';
 const CHANGE_FIELD='write/CHANGE_FIELD';
@@ -11,16 +10,9 @@ const [UPDATE_POST,UPDATE_POST_SUCCESS,UPDATE_POST_FAILURE]=createRequestActionT
 
 export const initialize=createAction(INITIALIZE);
 export const changeField=createAction(CHANGE_FIELD,({key,value})=>({key,value}));
-export const writePost=createAction(WRITE_POST,({title,body,tags})=>({title,body,tags}));
+export const writePost=createRequestThunk(WRITE_POST,postsAPI.writePost);
 export const setOriginalPost=createAction(SET_ORIGINAL_POST,post=>post);
-export const updatePost=createAction(UPDATE_POST,({id,title,body,tags})=>({id,title,body,tags}));
-
-const writePostSaga=createRequestSaga(WRITE_POST,postsAPI.writePost);
-const updatePostSaga=createRequestSaga(UPDATE_POST,postsAPI.updatePost);
-export function* writeSaga(){
-    yield takeLatest(WRITE_POST,writePostSaga);
-    yield takeLatest(UPDATE_POST,updatePostSaga);
-}
+export const updatePost=createAction(UPDATE_POST,postsAPI.updatePost);
 
 const initialState={
     title:'',

@@ -5,15 +5,13 @@ import './index.css'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { applyMiddleware, createStore } from 'redux';
-import rootReducer,{rootSaga} from './modules';
+import rootReducer from './modules';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
 import { check, tempSetUser } from './modules/user';
+import ReduxThunk from 'redux-thunk';
 
-const sagaMiddleware=createSagaMiddleware();
-const store=createStore(rootReducer,composeWithDevTools(applyMiddleware(sagaMiddleware)),);
-
+const store=createStore(rootReducer,composeWithDevTools(applyMiddleware(ReduxThunk)),);
 function loadUser(){
   try{
     const user=localStorage.getItem('user');
@@ -26,7 +24,6 @@ function loadUser(){
   }
 };
 
-sagaMiddleware.run(rootSaga);
 loadUser();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
