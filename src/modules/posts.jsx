@@ -1,15 +1,9 @@
-import { createAction, handleActions } from "redux-actions";
-import createRequestSaga, { createRequestActionTypes } from "../lib/createRequestSaga";
+import {  handleActions } from "redux-actions";
+import createRequestThunk, { createRequestActionTypes } from "../lib/createRequestThunk";
 import * as postsAPI from '../lib/api/posts';
-import {takeLatest} from 'redux-saga/effects';
 
 const [LIST_POSTS,LIST_POSTS_SUCCESS,LIST_POSTS_FAILURE]=createRequestActionTypes('posts/LIST_POSTS');
-export const listPosts=createAction(LIST_POSTS,({tag,username,page})=>({tag,username,page}));
-
-const listPostsSaga=createRequestSaga(LIST_POSTS,postsAPI.listPosts);
-export function* postsSaga(){
-    yield takeLatest(LIST_POSTS,listPostsSaga);
-};
+export const listPosts=createRequestThunk(LIST_POSTS,postsAPI.listPosts);
 
 const initialState={
     posts:null,
